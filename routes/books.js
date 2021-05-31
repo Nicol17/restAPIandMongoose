@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post')
+const Book = require('../models/Books')
 
 // GET ALL THE POSTS
 router.get('/', async (req, res) => {
     try{
-        const posts = await Post.find();
+        const posts = await Book.find();
         res.json(posts)
     } catch (err) {
         res.json({message:err})
@@ -14,47 +14,48 @@ router.get('/', async (req, res) => {
 
 // SUBMIT A POST
 router.post('/', async (req, res) => {
-    const post = new Post({
+    const book = new Book({
         title: req.body.title,
+        author: req.body.author,
         description: req.body.description
     });
 
     try{
-    const savedPost = await post.save();
-    res.json(savedPost);
+    const savedBook = await book.save();
+    res.json(savedBook);
     } catch (err) {
         res.json({message: err});
     }
 });
 
-// SPECIFIC POST
-router.get('/:postId', async (req, res) => {
+// SPECIFIC BOOK
+router.get('/:bookId', async (req, res) => {
     try{
-    const post = Post.findById(req.params.postID);
-    res.json(post);
+    const book = Book.findById(req.params.bookId);
+    res.json(book);
     } catch (err) {
         res.json({message: err});
     }
 })
 
 // DELETE POST 
-router.delete('/:postId', async (req, res) => {
+router.delete('/:bookId', async (req, res) => {
     try{    
-        const removedPost = await Post.remove({_id: req.params.postID})
-        res.json(removedPost);
+        const removedBook = await Book.remove({_id: req.params.bookId})
+        res.json(removedBook);
     } catch (err) {
         res.json({message: err})
     }
 })
 
 // UPDATE A POST 
-router.patch('/:postId', async (req, res) => {
+router.patch('/:bookId', async (req, res) => {
     try {
-    const updatedPost = await Post.updateOne(
-        {_id: req.params.postId }, 
+    const updatedBook = await Book.updateOne(
+        {_id: req.params.bookId }, 
         { $set: {title: req.body.title } }
         );
-    res.json(updatedPost);
+    res.json(updatedBook);
     } catch (err) {
         res.json({message: err})
     }

@@ -6,12 +6,12 @@ require('dotenv/config');
 const app = express();
 
 // IMPORT ROUTES
-const postsRoute = require('./routes/posts')
+const booksRoute = require('./routes/books')
 
 // MIDDLEWARE
 app.use(bodyParser.json())
 app.use(cors());
-app.use('/posts', postsRoute);
+app.use('/books', booksRoute);
 
 
 
