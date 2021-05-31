@@ -19,7 +19,7 @@ const BooksSchema = mongoose.Schema({
 
     description: {
         type: String,
-        required: true
+        required: false
     }, 
 
     cover: {

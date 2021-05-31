@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
-        description: req.body.description
+        isbn: req.body.isbn
     });
 
     try{
